@@ -1,0 +1,15 @@
+---
+- name: get atomic current id with master
+  shell: "rpm-ostree status | grep '*' | awk -F' ' '{print $4}'"
+  register: id
+  changed_when: false
+
+- name: Init the atomic_id fact
+  set_fact:
+    atomic_id: "null"
+
+- name: Set the atomic_id fact
+  set_fact:
+    atomic_id: "{{id}}"
+
+- debug: msg="get atomic id  {{atomic_id}} "

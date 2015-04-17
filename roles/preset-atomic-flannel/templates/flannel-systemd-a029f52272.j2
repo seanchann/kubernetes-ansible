@@ -1,0 +1,16 @@
+#Systemd unit file for running flanneld
+
+[Unit]
+Description=Flanneld overlay address etcd agent
+After=network.target
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/sysconfig/flanneld
+ExecStart=
+ExecStart=/usr/bin/flanneld -etcd-endpoints=${FLANNEL_ETCD} -etcd-prefix=${FLANNEL_ETCD_KEY}
+ExecStartPost=-/bin/bash -c "until [ -e /run/flannel/subnet.env ]; do echo \"waiting for write.\"; sleep 3; done"
+
+
+[Install]
+WantedBy=docker.service

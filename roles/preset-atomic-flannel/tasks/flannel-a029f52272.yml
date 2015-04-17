@@ -1,0 +1,14 @@
+---
+- name: Assures this dir exists
+  file: path=/etc/systemd/system/flanneld.service.d  state=directory
+
+- name: fix flannel systemd file
+  template: src=flannel-systemd-a029f52272.j2 dest=/etc/systemd/system/flanneld.service.d/flanneld.conf mode=0644
+
+- name: systmed reload
+  command: /usr/bin/systemctl  daemon-reload
+
+- name: Enable flannel
+  service: name=flanneld enabled=yes state=started
+  notify:
+        - restart flanneld

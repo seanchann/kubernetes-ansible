@@ -1,0 +1,14 @@
+---
+- name: Assures this dir exists
+  file: path=/etc/systemd/system/etcd.service.d  state=directory
+
+- name: fix etcd systemd file
+  template: src=etcd-systemd-a029f52272.j2 dest=/etc/systemd/system/etcd.service.d/etcd.conf mode=0644
+
+- name: systmed reload
+  command: /usr/bin/systemctl  daemon-reload
+
+- name: Enable etcd
+  service: name=etcd enabled=yes state=started
+  notify:
+        - restart etcd

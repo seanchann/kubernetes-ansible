@@ -1,0 +1,4 @@
+---
+#if dest is atomic.make docker use flannel overlay network
+- include: atomic.yml
+  when: is_atomic

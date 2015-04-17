@@ -1,0 +1,6 @@
+---
+
+- debug: msg="{{atomic_id}}"
+
+- include: flannel-a029f52272.yml
+  when: atomic_id.stdout == "a029f52272"

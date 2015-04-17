@@ -1,0 +1,6 @@
+---
+
+- debug: msg="{{atomic_id}}"
+
+- include: etcd-a029f52272.yml
+  when: atomic_id.stdout == "a029f52272"

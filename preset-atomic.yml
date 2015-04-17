@@ -1,0 +1,19 @@
+---
+- hosts: all
+  sudo: yes
+  roles:
+          - preset-atomic-common
+
+
+- hosts: etcd
+  sudo: yes
+  roles:
+        - preset-atomic-etcd
+  tags: preset-etcd
+
+- hosts:
+        - masters
+        - minions
+  sudo: yes
+  roles:
+        - preset-atomic-flannel

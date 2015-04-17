@@ -10,4 +10,5 @@
   sudo: yes
   roles:
           - common
+          - flannel-docker-config
           - flannel
